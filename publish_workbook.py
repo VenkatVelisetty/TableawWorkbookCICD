@@ -1,7 +1,6 @@
 import argparse
 import tableauserverclient as TSC
 
-
 def main(args):
     wb_list = []
     for wb in args.workbook_files.split(","):
