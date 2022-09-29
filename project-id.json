@@ -1,8 +1,8 @@
 {
   "workbooks": [
     {
-      "name": "SampleSuperstore Dashboard3",
-      "file_path": "SampleSuperstore Dashboard3.twb",
+      "name": "SampleSuperstore Dashboard",
+      "file_path": "SampleSuperstore Dashboard4.twb",
       "project_path": "Technology",
       "option": {
         "tags": ["sample", "temp"],
@@ -11,16 +11,5 @@
         "description": "Sample description"
       }
     }
-    {
-      "name": "Sample Superstore Dashboard",
-      "file_path": "Sample Superstore Dashboard.twb",
-      "project_path": "Technology",
-      "option": {
-        "tags": ["sample", "temp"],
-        "hidden_views": ["Event by day"],
-        "show_tabs": true,
-        "description": "Sample description"
-      }
-    }
-  ]
+      ]
 }
