@@ -1,8 +1,19 @@
 {
   "workbooks": [
     {
-      "name": "NZ_Census1",
-      "file_path": "NZ_Census1.twbx",
+      "name": "SampleSuperstore Dashboard3",
+      "file_path": "SampleSuperstore Dashboard3.twb",
+      "project_path": "Technology",
+      "option": {
+        "tags": ["sample", "temp"],
+        "hidden_views": ["Event by day"],
+        "show_tabs": true,
+        "description": "Sample description"
+      }
+    }
+    {
+      "name": "Sample Superstore Dashboard",
+      "file_path": "Sample Superstore Dashboard.twb",
       "project_path": "Technology",
       "option": {
         "tags": ["sample", "temp"],
