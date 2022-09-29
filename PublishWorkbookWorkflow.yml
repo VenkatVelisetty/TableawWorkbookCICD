@@ -1,7 +1,7 @@
-name: PublishTWBXWorkbook
+name: PublishWorkbook
 on:
   pull_request:
-    branches: 
+    branches:
       - main
     types: [closed]
 env:
@@ -11,13 +11,14 @@ env:
 jobs:
   Publish:
     runs-on: ubuntu-latest
-    outputs:
-      changed_files: ${{ steps.get-files.outputs.files }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          lfs: true
           fetch-depth: 0
+      - name: Checkout LFS objects
+        run: git lfs checkout
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
@@ -25,16 +26,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip 
-          pip install tableauserverclient
-      - name: Get changed files
-        id: get-files
-        run: echo ::set-output name=files::$(git log -m -1 --name-only --diff-filter=AM --pretty="format:" $(git rev-parse HEAD) -- *.twbx -- *.twb | jq -R -s -c 'split("\n")[:-1]' | jq -r '.[] | (","+.)')
+          pip install tableauserverclient==0.22
       - name: Publish Workbook
         run: |
-          project_id=`jq '.project_id' project-id.json`
-          echo "Files list :: " "${{ steps.get-files.outputs.files }}"
-          if [ "${{ steps.get-files.outputs.files }}" != '' -a "$project_id" != ''  ];then
-              python3 publish_workbook.py --server_url "${{env.SERVURL}}" --project_id ${project_id} --password ${{env.PASS}} --username ${{env.UNAME}} --workbook_files "${{ steps.get-files.outputs.files }}"
+          ls
+          project_id=`jq '.workbooks' project-id.json`
+          if [ "$project_id" != '' ];then
+              python3 publish_workbook.py --server_url "${{env.SERVURL}}" --project_id "${project_id}" --password ${{env.PASS}} --username ${{env.UNAME}}
           else
-              echo "TWBX or TWB file list is Empty or project id is not accessable."
+              echo "project id is not accessable."
           fi
