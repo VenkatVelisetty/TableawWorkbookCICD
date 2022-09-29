@@ -1,8 +1,8 @@
 {
   "workbooks": [
     {
-      "name": "NZ_Census",
-      "file_path": "NZ_Census.twbx",
+      "name": "NZ_Census1",
+      "file_path": "NZ_Census1.twbx",
       "project_path": "Technology",
       "option": {
         "tags": ["sample", "temp"],
