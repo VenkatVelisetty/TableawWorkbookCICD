@@ -1,8 +1,19 @@
 {
   "workbooks": [
     {
+      "name": "Film_Workbook",
+      "file_path": "film_workbook.twb",
+      "project_path": "Technology",
+      "option": {
+        "tags": ["sample", "temp"],
+        "hidden_views": ["Event by day"],
+        "show_tabs": true,
+        "description": "Sample description"
+      }
+    },
+    {
       "name": "NZ_Census",
-      "file_path": "NZ_Census1.twbx",
+      "file_path": "NZ_Census.twbx",
       "project_path": "Technology",
       "option": {
         "tags": ["sample", "temp"],
