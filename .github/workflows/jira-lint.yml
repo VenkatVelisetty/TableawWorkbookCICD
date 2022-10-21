@@ -1,0 +1,16 @@
+name: Verify PR - Jira Lint
+on: [pull_request]
+
+jobs:
+  jira-lint:
+    name: JIRA Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: invitation-homes/jira-lint@v1
+        if: github.actor != 'dependabot[bot]'
+        name: Validate PR Title, Branch Name & Commit Messages
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          jira-token: ${{ secrets.JIRA_API_BASIC_AUTH_HEADER_VALUE }}
+          skip-comments: true
+          pr-threshold: 800
