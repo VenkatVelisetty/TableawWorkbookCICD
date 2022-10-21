@@ -1,0 +1,32 @@
+{
+  "workbooks": [
+    {
+      "name": "S&P New",
+      "file_path": "S&P New.twbx",
+      "project_path": "Technology",
+      "tags": [
+        "profit",
+        "sales"
+      ],
+      "hidden_views": [
+        "",""
+      ],
+      "show_tabs": false,
+      "description": "Price Forecast"
+    },
+    {
+      "name": "NewSales_vs_Profit",
+      "file_path": "Sales_vs_Profit.twb",
+      "project_path": "Technology",
+      "tags": [
+        "profit",
+        "sales"
+      ],
+      "hidden_views": [
+        "",""
+      ],
+      "show_tabs": true,
+      "description": "sales"
+    }
+  ]
+}
