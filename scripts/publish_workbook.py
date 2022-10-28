@@ -11,7 +11,7 @@ def main(args):
         print(args.server_url)
         tableau_auth = TSC.TableauAuth(
             args.username, args.password,site_id=project_data['site_id'])
-        server = TSC.Server(args.server_url)
+        server = TSC.Server('https://tableau.devinvh.com')
         project_data_json = project_data['workbooks']
         with server.auth.sign_in(tableau_auth):
             site_item = server.sites.get_by_name('Enterprise')
