@@ -8,7 +8,7 @@ def main(args):
     project_data = json.loads(args.project_data)
     try:
         # Step 1: Sign in to server.
-        print(project_data['site_id'])
+        print(args.server_url)
         tableau_auth = TSC.TableauAuth(
             args.username, args.password,site_id=project_data['site_id'])
         server = TSC.Server(args.server_url)
