@@ -18,6 +18,7 @@ def main(args):
         with server.auth.sign_in(tableau_auth):
             server.version='2.6'
             print(server.version)
+            server.auth.switch_site('NEW_SITENAME')
             try:
                 for data in project_data_json:
                     wb_path = os.path.dirname(os.path.realpath(__file__)).rsplit(
