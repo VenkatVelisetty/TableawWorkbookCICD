@@ -16,7 +16,7 @@ def main(args):
         
         with server.auth.sign_in(tableau_auth):
             site_item = server.sites.get_by_name('Enterprise')
-            print(site_item.id, site_item.name, site_item.content_url, site_item.state)
+            print(site_item.id, site_item.name, site_item.state)
             server.auth.switch_site('Enterprise')
             try:
                 for data in project_data_json:
