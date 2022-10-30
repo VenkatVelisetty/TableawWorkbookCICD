@@ -13,11 +13,10 @@ def main(args):
             args.username, args.password,site_id=project_data['site_id'])
         server = TSC.Server('https://tableau.devinvh.com',use_server_version=True)
         project_data_json = project_data['workbooks']
-        server.version='2.6'
-        server.auth.switch_site('834abe2d-18ac-46d3-9346-a2f3079941d2')
+        
         
         with server.auth.sign_in(tableau_auth):
-         
+            server.auth.switch_site('834abe2d-18ac-46d3-9346-a2f3079941d2')
             try:
                 for data in project_data_json:
                     wb_path = os.path.dirname(os.path.realpath(__file__)).rsplit(
