@@ -16,6 +16,7 @@ def main(args):
         
         
         with server.auth.sign_in(tableau_auth):
+            server.version='2.6'
             print(server.version)
             try:
                 for data in project_data_json:
