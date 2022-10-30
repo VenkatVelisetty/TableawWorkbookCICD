@@ -10,12 +10,13 @@ def main(args):
         # Step 1: Sign in to server.
         print(args.server_url)
         tableau_auth = TSC.TableauAuth(
-            args.username, args.password,site_id='Enterprise')
+            args.username, args.password,site_id=project_data['site_id'])
         server = TSC.Server('https://tableau.devinvh.com')
         project_data_json = project_data['workbooks']
         with server.auth.sign_in(tableau_auth):
             site_item = server.sites.get_by_name('Enterprise')
             print(site_item.id, site_item.name, site_item.content_url, site_item.state)
+            server.auth.switch_site('Enterprise')
             try:
                 for data in project_data_json:
                     wb_path = os.path.dirname(os.path.realpath(__file__)).rsplit(
