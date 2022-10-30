@@ -16,9 +16,10 @@ def main(args):
         
         with server.auth.sign_in(tableau_auth):
             site_item = server.sites.get_by_name('Enterprise')
-            print(site_item.id, site_item.name, site_item.state)
-            server.auth.switch_site('Enterprise')
+            print(site_item.id, site_item.name, site_item.content_url, site_item.state)
+            
             try:
+                server.auth.switch_site('Enterprise')
                 for data in project_data_json:
                     wb_path = os.path.dirname(os.path.realpath(__file__)).rsplit(
                         '/', 1)[0] + "/workbooks/" + data['file_path']
