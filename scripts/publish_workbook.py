@@ -10,12 +10,13 @@ def main(args):
         # Step 1: Sign in to server.
         print(args.server_url)
         tableau_auth = TSC.TableauAuth(
-            args.username, args.password,'Enterprise')
+            args.username, args.password,'')
         server = TSC.Server('https://tableau.devinvh.com',use_server_version=True)
         project_data_json = project_data['workbooks']
         
         
         with server.auth.sign_in(tableau_auth):
+            print(server.version)
             try:
                 for data in project_data_json:
                     wb_path = os.path.dirname(os.path.realpath(__file__)).rsplit(
