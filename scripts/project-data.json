@@ -1,10 +1,10 @@
 {
-  "site_id": "",
+  "site_id": "DataLab",
   "workbooks": [
     {
       "name": "S&P New",
       "file_path": "S&P New.twbx",
-      "project_path": "Technology",
+      "project_path": "Test1",
       "tags": [
         "profit",
         "sales"
