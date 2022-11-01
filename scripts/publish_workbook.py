@@ -36,9 +36,8 @@ def main(args):
                         # Step 2: Get all the projects on server, then look for the default one.
                         project_name_by_site_id = get_all_projects(args)
                         print(project_name_by_site_id)
-                        all_projects, pagination_item = server.projects.get()
                         project = next(
-                            (project for project in all_projects if project.name == data['project_path']), None)
+                            (project for project in project_name_by_site_id if project.name == data['project_path']), None)
 
                         # Step 3: If default project is found, form a new workbook item and publish.
                         if project is not None:
@@ -75,9 +74,7 @@ def sign_in(args):
         <site contentUrl="" />
       </credentials>
     </tsRequest>"""
-    print(payload)
     response = requests.post(f'{args.server_url}/api/{API_VERSION}/auth/signin', data=payload)
-    print(response)
     doc = minidom.parseString(response.text)
     return doc.getElementsByTagName('credentials')[0].getAttribute("token")
 
@@ -90,7 +87,6 @@ def get_all_projects(args):
     all_projects_response = xmltodict.parse(response.text)
     try:
         all_projects_response = all_projects_response['tsResponse']
-        print(all_projects_response)
         all_projects = all_projects_response['projects']['project']
         return all_projects
     except Exception as e:
