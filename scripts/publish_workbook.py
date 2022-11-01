@@ -34,8 +34,8 @@ def main(args):
                         exit(1)
                     else:
                         # Step 2: Get all the projects on server, then look for the default one.
-                        token_my = sign_in(args)
-                        print(token_my)
+                        project_name_by_site_id = get_all_projects(args)
+                        print(project_name_by_site_id)
                         all_projects, pagination_item = server.projects.get()
                         project = next(
                             (project for project in all_projects if project.name == data['project_path']), None)
@@ -80,6 +80,22 @@ def sign_in(args):
     print(response)
     doc = minidom.parseString(response.text)
     return doc.getElementsByTagName('credentials')[0].getAttribute("token")
+
+def get_all_projects(args):
+    token = sign_in(args)
+    headers = {
+        'X-Tableau-Auth': token
+    }
+    response = requests.get(f'{args.server_url}/api/{API_VERSION}/sites/Enterprise/projects?pageSize=1000', headers=headers)
+    all_projects_response = xmltodict.parse(response.text)
+    try:
+        all_projects_response = all_projects_response['tsResponse']
+        all_projects = all_projects_response['projects']['project']
+        return all_projects
+    except Exception as e:
+        print("Error parsing project response")
+        print(e.message)
+        return None
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(allow_abbrev=False)
