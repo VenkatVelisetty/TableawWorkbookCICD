@@ -38,7 +38,7 @@ jobs:
 
       - name: Publish Workbook
         run: |
-          project_data=`jq '.workbooks' ./scripts/project-data.json`
+          project_data=`jq '.' ./scripts/project-data.json`
           if [ "$project_data" != '' ];then
               python3 ./scripts/publish_workbook.py --username ${{env.UNAME}} --password ${{env.PASS}} --server_url "${{env.SERVURL}}" --project_data "${project_data}"
           else

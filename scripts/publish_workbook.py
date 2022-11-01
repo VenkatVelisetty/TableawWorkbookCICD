@@ -5,12 +5,15 @@ import os
 
 
 def main(args):
-    project_data_json = json.loads(args.project_data)
+    project_data = json.loads(args.project_data)
     try:
         # Step 1: Sign in to server.
-        tableau_auth = TSC.TableauAuth(args.username, args.password)
-        server = TSC.Server(args.server_url)
-
+        tableau_auth = TSC.TableauAuth(
+            args.username, args.password,site_id=project_data['site_id'])
+        server = TSC.Server(args.server_url,use_server_version=True)
+        project_data_json = project_data['workbooks']
+        
+        
         with server.auth.sign_in(tableau_auth):
             try:
                 for data in project_data_json:
