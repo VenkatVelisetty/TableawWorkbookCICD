@@ -10,7 +10,7 @@ def main(args):
         # Step 1: Sign in to server.
         print(args.server_url)
         tableau_auth = TSC.PersonalAccessTokenAuth(
-            args.username, args.password,site_id=project_data['site_id'])
+            args.username, args.password,'Enterprise')
         server = TSC.Server('https://tableau.devinvh.com',use_server_version=True)
         project_data_json = project_data['workbooks']
         
