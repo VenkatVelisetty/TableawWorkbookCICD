@@ -2,6 +2,9 @@ import argparse
 import tableauserverclient as TSC
 import json
 import os
+import xml.dom.minidom as minidom
+import requests
+import xmltodict
 
 API_VERSION = '3.9'
 def main(args):
