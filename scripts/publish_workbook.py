@@ -5,6 +5,8 @@ import os
 import xml.dom.minidom as minidom
 import requests
 import xmltodict
+from treelib import Tree
+from operator import itemgetter
 
 API_VERSION = '3.9'
 def main(args):
@@ -34,15 +36,13 @@ def main(args):
                         exit(1)
                     else:
                         # Step 2: Get all the projects on server, then look for the default one.
-                        project_name_by_site_id = get_all_projects(args)
-                        print(project_name_by_site_id)
-                        project = next(
-                            (project for project in project_name_by_site_id if project.name == data['project_path']), None)
+                        project_id = get_project_id_by_path_with_tree(args, data['project_path'])
+                        print(project_id)
 
                         # Step 3: If default project is found, form a new workbook item and publish.
-                        if project is not None:
+                        if project_id is not None:
                             new_workbook = TSC.WorkbookItem(
-                                name=data['name'], project_id=project.id, show_tabs=data['show_tabs'])
+                                name=data['name'], project_id=project_id, show_tabs=data['show_tabs'])
                             new_workbook = server.workbooks.publish(
                                 new_workbook, wb_path, 'Overwrite', hidden_views=data['hidden_views'])
                             if data['tags'] is not None:
@@ -92,6 +92,47 @@ def get_all_projects(args):
     except Exception as e:
         print("Error parsing project response .\n", e)
         return None
+    
+
+def get_project_id_by_path_with_tree(args, project_path):
+    project_name = project_path.split("/")[-1]
+
+    all_projects = get_all_projects(args)
+    project_tree =  parse_projects_to_tree(all_projects)
+    project_candidate = find_project_by_name(project_name, all_projects)
+
+    project_path_dict = defaultdict(lambda: None)
+    for project in project_candidate:
+        nodes = list(project_tree.rsearch(project['@id']))
+        nodes.reverse()
+        node_path = "/".join([project_tree.get_node(node).data for node in nodes[1:]])
+        project_path_dict[node_path] = project['@id']
+
+    return project_path_dict[project_path]
+
+def parse_projects_to_tree(all_projects):
+    tree = Tree()
+    tree.create_node("tableau", "tableau", data = 'tableau')
+
+    list_root = []
+    for project in all_projects:
+        if '@parentProjectId' not in project.keys():
+            tree.create_node(project['@id'], project['@id'], parent='tableau', data=project['@name'])
+            list_root.append(all_projects.index(project))
+
+    index_list = list(set(range(len(all_projects))).difference(list_root))
+    all_projects = list(itemgetter(*index_list)(all_projects))
+
+
+    return tree
+	
+def find_project_by_name(project_name, list_project):
+    temp_projects = list()
+    for project in list_project:
+        if project['@name'] == project_name:
+            temp_projects.append(project)
+    return temp_projects
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(allow_abbrev=False)
