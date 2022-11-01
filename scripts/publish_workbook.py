@@ -72,7 +72,7 @@ def sign_in(args):
     payload = \
     f"""<tsRequest>
       <credentials name="{ args.username }" password="{ args.password }" >
-        <site contentUrl="" />
+        <site id="e4fc3628-68b4-4a72-a956-9fc3c02192f4" contentUrl="" />
       </credentials>
     </tsRequest>"""
     response = requests.post(f'{args.server_url}/api/{API_VERSION}/auth/signin', data=payload)
