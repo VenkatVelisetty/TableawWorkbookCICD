@@ -86,8 +86,9 @@ def get_all_projects(args):
     }
     response = requests.get(f'{args.server_url}/api/{API_VERSION}/sites/e4fc3628-68b4-4a72-a956-9fc3c02192f4/projects?pageSize=1000', headers=headers)
     all_projects_response = xmltodict.parse(response.text)
+    print(all_projects_response)
     try:
-	print(all_projects_response)
+	
         all_projects_response = all_projects_response['tsResponse']
 	print("all_projects_response")
 	print(all_projects_response)
