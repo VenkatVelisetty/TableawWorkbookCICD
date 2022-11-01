@@ -93,8 +93,7 @@ def get_all_projects(args):
         all_projects = all_projects_response['projects']['project']
         return all_projects
     except Exception as e:
-        print("Error parsing project response")
-        print(e.message)
+        print("Error parsing project response .\n", e)
         return None
 
 if __name__ == '__main__':
