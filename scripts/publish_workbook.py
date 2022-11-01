@@ -18,7 +18,7 @@ def main(args):
         project_id_by_onee = get_project_id_by_path_with_tree(args, 'Test1')
         print(project_id_by_onee)
         tableau_auth = TSC.TableauAuth(
-            args.username, args.password,'')
+            args.username, args.password, '')
         server = TSC.Server('https://tableau.devinvh.com',use_server_version=True)
         project_data_json = project_data['workbooks']
 	
@@ -76,7 +76,7 @@ def sign_in(args):
     payload = \
     f"""<tsRequest>
       <credentials name="{ args.username }" password="{ args.password }" >
-        <site id="e4fc3628-68b4-4a72-a956-9fc3c02192f4" contentUrl="" />
+        <site id="e4fc3628-68b4-4a72-a956-9fc3c02192f4" contentUrl="DataLab" />
       </credentials>
     </tsRequest>"""
     response = requests.post(f'{args.server_url}/api/{API_VERSION}/auth/signin', data=payload)
