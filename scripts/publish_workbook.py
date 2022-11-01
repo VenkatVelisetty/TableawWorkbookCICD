@@ -90,6 +90,7 @@ def get_all_projects(args):
     all_projects_response = xmltodict.parse(response.text)
     try:
         all_projects_response = all_projects_response['tsResponse']
+        print(all_projects_response)
         all_projects = all_projects_response['projects']['project']
         return all_projects
     except Exception as e:
