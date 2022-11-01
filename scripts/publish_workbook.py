@@ -37,6 +37,7 @@ def main(args):
                     else:
                         # Step 2: Get all the projects on server, then look for the default one.
                         project_id = get_project_id_by_path_with_tree(args, data['project_path'])
+			
                         print(project_id)
 
                         # Step 3: If default project is found, form a new workbook item and publish.
