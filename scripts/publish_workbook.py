@@ -7,6 +7,7 @@ import requests
 import xmltodict
 from treelib import Tree
 from operator import itemgetter
+from collections import defaultdict
 
 API_VERSION = '3.9'
 def main(args):
