@@ -19,6 +19,8 @@ def main(args):
             args.username, args.password,'')
         server = TSC.Server('https://tableau.devinvh.com',use_server_version=True)
         project_data_json = project_data['workbooks']
+	project_id_by_name = get_project_id_by_path_with_tree(args, 'Test1')
+	print(project_id_by_name)
         server.add_http_options({'verify': False})
         with server.auth.sign_in(tableau_auth):
             #site_item = server.sites.get_by_name('DataLab')
