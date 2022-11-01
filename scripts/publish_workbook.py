@@ -16,7 +16,7 @@ def main(args):
         # Step 1: Sign in to server.
         print(args.server_url)
         tableau_auth = TSC.TableauAuth(
-            args.username, args.password, contentUrl='DataLab')
+            args.username, args.password, content_url='DataLab')
         server = TSC.Server('https://tableau.devinvh.com',use_server_version=True)
         project_data_json = project_data['workbooks']
 	
