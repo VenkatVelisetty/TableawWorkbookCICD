@@ -43,7 +43,7 @@ def main(args):
                         # Step 3: If default project is found, form a new workbook item and publish.
                         if project_id_by_name is not None:
                             new_workbook = TSC.WorkbookItem(
-                                name=data['name'], project_id=project_id, show_tabs=data['show_tabs'])
+                                name=data['name'], project_id=project_id_by_name, show_tabs=data['show_tabs'])
                             new_workbook = server.workbooks.publish(
                                 new_workbook, wb_path, 'Overwrite', hidden_views=data['hidden_views'])
                             if data['tags'] is not None:
