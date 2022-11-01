@@ -15,12 +15,14 @@ def main(args):
     try:
         # Step 1: Sign in to server.
         print(args.server_url)
+	project_id_by_name = get_project_id_by_path_with_tree(args, 'Test1')
+	print(project_id_by_name)
         tableau_auth = TSC.TableauAuth(
             args.username, args.password,'')
         server = TSC.Server('https://tableau.devinvh.com',use_server_version=True)
         project_data_json = project_data['workbooks']
-	project_id_by_name = get_project_id_by_path_with_tree(args, 'Test1')
-	print(project_id_by_name)
+	
+	
         server.add_http_options({'verify': False})
         with server.auth.sign_in(tableau_auth):
             #site_item = server.sites.get_by_name('DataLab')
