@@ -15,8 +15,6 @@ def main(args):
     try:
         # Step 1: Sign in to server.
         print(args.server_url)
-	project_id_by_name = get_project_id_by_path_with_tree(args, 'Test1')
-	print(project_id_by_name)
         tableau_auth = TSC.TableauAuth(
             args.username, args.password,'')
         server = TSC.Server('https://tableau.devinvh.com',use_server_version=True)
