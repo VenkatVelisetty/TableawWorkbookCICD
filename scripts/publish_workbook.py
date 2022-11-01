@@ -75,6 +75,7 @@ def sign_in(args):
         <site contentUrl="" />
       </credentials>
     </tsRequest>"""
+    print(payload)
     response = requests.post(f'{args.server_url}{API_VERSION}/auth/signin', data=payload)
     doc = minidom.parseString(response.text)
     return doc.getElementsByTagName('credentials')[0].getAttribute("token")
