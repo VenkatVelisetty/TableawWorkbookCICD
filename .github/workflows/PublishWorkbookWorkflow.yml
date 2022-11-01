@@ -34,6 +34,8 @@ jobs:
           python -m pip install --upgrade pip 
           pip install tableauserverclient==0.22
           pip install xmltodict==0.12.0
+          pip install treelib==1.6.1
+          pip install mergedeep==1.3.4
 
       - name: Publish Workbook
         run: |
