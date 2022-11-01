@@ -86,7 +86,7 @@ def get_all_projects(args):
     headers = {
         'X-Tableau-Auth': token
     }
-    response = requests.get(f'{args.server_url}/api/{API_VERSION}/sites/Enterprise/projects?pageSize=1000', headers=headers)
+    response = requests.get(f'{args.server_url}/api/{API_VERSION}/sites/834abe2d-18ac-46d3-9346-a2f3079941d2/projects?pageSize=1000', headers=headers)
     all_projects_response = xmltodict.parse(response.text)
     try:
         all_projects_response = all_projects_response['tsResponse']
