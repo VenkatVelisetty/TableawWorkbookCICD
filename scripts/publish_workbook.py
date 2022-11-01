@@ -3,7 +3,7 @@ import tableauserverclient as TSC
 import json
 import os
 
-
+API_VERSION = '3.9'
 def main(args):
     project_data = json.loads(args.project_data)
     try:
@@ -31,6 +31,8 @@ def main(args):
                         exit(1)
                     else:
                         # Step 2: Get all the projects on server, then look for the default one.
+                        token_my = sign_in(args)
+                        print(token_my)
                         all_projects, pagination_item = server.projects.get()
                         project = next(
                             (project for project in all_projects if project.name == data['project_path']), None)
@@ -62,7 +64,17 @@ def main(args):
     except Exception as e:
         print("Signin error.\n", e)
         exit(1)
-
+        
+def sign_in(args):
+    payload = \
+    f"""<tsRequest>
+      <credentials name="{ args.username }" password="{ args.password }" >
+        <site contentUrl="" />
+      </credentials>
+    </tsRequest>"""
+    response = requests.post(f'{args.server_url}{API_VERSION}/auth/signin', data=payload)
+    doc = minidom.parseString(response.text)
+    return doc.getElementsByTagName('credentials')[0].getAttribute("token")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(allow_abbrev=False)
